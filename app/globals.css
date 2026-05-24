@@ -14,8 +14,15 @@
   --font-jost: var(--font-jost), sans-serif;
 }
 
-html {
+html,
+body {
   scroll-behavior: smooth;
+  background-color: white;
+}
+
+html.dark,
+html.dark body {
+  background-color: #071320;
 }
 
 /* Custom scroll margin helper targeting sections */
