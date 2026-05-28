@@ -18,15 +18,17 @@ const CATEGORIES_DATA = {
     { id: 'L14', name: 'Strata Shelving Unit', price: 'Birr 3,900', tag: 'Handmade Core', image: 'assets/work/lr/lr014.jpg', specs: { dimensions: '160cm x 40cm x 180cm', material: 'Modular solid oak shelving with offset geometry', frame: 'Heavy-gauge internal structural steel', warranty: '3 Years Structural', leadTime: '12–15 Days' } },
   ],
   bedroom: [
-    { id: 'B01', name: 'Opus King Bed Frame', price: 'Birr 6,200', tag: 'Bestseller', image: 'assets/work/bs/bs01.jpg', specs: { dimensions: '210cm x 190cm x 120cm', material: 'Upholstered statement headboard in bouclé fabric', frame: 'Solid brass-capped structural legs', warranty: '7 Years Structural', leadTime: '14–18 Days' } },
-    { id: 'B02', name: 'Sable Wardrobe System', price: 'Birr 9,800', tag: 'Premium Fitted', image: 'assets/work/bs/bs02.jpg', specs: { dimensions: '240cm x 60cm x 220cm', material: 'Matte ebony finish, soft-close brass handles, integrated LEDs', frame: 'Heavy structural backing grids', warranty: '5 Years Structural', leadTime: '22–30 Days' } },
-    { id: 'B02', name: 'Sable Wardrobe System', price: 'Birr 9,800', tag: 'Premium Fitted', image: 'assets/work/bs/bs03.jpg', specs: { dimensions: '240cm x 60cm x 220cm', material: 'Matte ebony finish, soft-close brass handles, integrated LEDs', frame: 'Heavy structural backing grids', warranty: '5 Years Structural', leadTime: '22–30 Days' } },
-    { id: 'B02', name: 'Sable Wardrobe System', price: 'Birr 9,800', tag: 'Premium Fitted', image: 'assets/work/bs/bs04.jpg', specs: { dimensions: '240cm x 60cm x 220cm', material: 'Matte ebony finish, soft-close brass handles, integrated LEDs', frame: 'Heavy structural backing grids', warranty: '5 Years Structural', leadTime: '22–30 Days' } }
-
-  ],
+  { id: 'B01', name: 'Opus King Bed Frame', price: 'Birr 6,200', tag: 'Bestseller', image: 'assets/work/lr/lr01.jpg', fallbackImage: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80', specs: { dimensions: '210cm x 190cm x 120cm', material: 'Upholstered statement headboard in bouclé fabric', frame: 'Solid brass-capped structural legs', warranty: '7 Years Structural', leadTime: '14–18 Days' } },
+  { id: 'B02', name: 'Sable Wardrobe System', price: 'Birr 9,800', tag: 'Premium Fitted', image: 'assets/work/lr/lr02.jpg', fallbackImage: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80', specs: { dimensions: '240cm x 60cm x 220cm', material: 'Matte ebony finish, soft-close brass handles, integrated LEDs', frame: 'Heavy structural backing grids', warranty: '5 Years Structural', leadTime: '22–30 Days' } },
+  { id: 'B03', name: 'Sable Wardrobe System', price: 'Birr 9,800', tag: 'Premium Fitted', image: 'assets/work/lr/lr03.jpg', fallbackImage: 'https://images.unsplash.com/photo-1560448075-bb485b067938?w=800&q=80', specs: { dimensions: '240cm x 60cm x 220cm', material: 'Matte ebony finish, soft-close brass handles, integrated LEDs', frame: 'Heavy structural backing grids', warranty: '5 Years Structural', leadTime: '22–30 Days' } },
+  { id: 'B04', name: 'Sable Wardrobe System', price: 'Birr 9,800', tag: 'Premium Fitted', image: 'assets/work/lr/lr04.jpg', fallbackImage: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&q=80', specs: { dimensions: '240cm x 60cm x 220cm', material: 'Matte ebony finish, soft-close brass handles, integrated LEDs', frame: 'Heavy structural backing grids', warranty: '5 Years Structural', leadTime: '22–30 Days' } }
+],
   dining: [
-    { id: 'D01', name: 'Atlas Dining Table', price: 'Birr 8,400', tag: 'Signature Piece', image: 'assets/work/d/d01.jpg', specs: { dimensions: '200cm x 100cm x 75cm', material: 'Live-edge oak slab top on a brushed steel trestle base', frame: 'Interlocking geometric metal sub-frame', warranty: '3 Years Structural', leadTime: '14–18 Days' } }
-  ]
+  { id: 'D01', name: 'Atlas Dining Table', price: 'Birr 8,400', tag: 'Signature Piece', image: 'assets/work/d/d01.jpg', fallbackImage: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80', specs: { dimensions: '200cm x 100cm x 75cm', material: 'Live-edge oak slab top on a brushed steel trestle base', frame: 'Interlocking geometric metal sub-frame', warranty: '3 Years Structural', leadTime: '14–18 Days' } },
+  { id: 'D02', name: 'Meridian Dining Chair Set', price: 'Birr 4,200', tag: 'Set of 4', image: 'assets/work/d/d02.jpg', fallbackImage: 'https://images.unsplash.com/photo-1551298370-9d3d53740c72?w=800&q=80', specs: { dimensions: '50cm x 55cm x 90cm', material: 'Full-grain leather seat on solid walnut frame', frame: 'Mortise and tenon joinery', warranty: '5 Years Structural', leadTime: '10–14 Days' } },
+  { id: 'D03', name: 'Lune Sideboard', price: 'Birr 6,600', tag: 'New Arrival', image: 'assets/work/d/d03.jpg', fallbackImage: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=800&q=80', specs: { dimensions: '180cm x 45cm x 80cm', material: 'Smoked oak veneer with brushed brass inlay handles', frame: 'Solid hardwood carcass with adjustable shelving', warranty: '5 Years Structural', leadTime: '16–20 Days' } },
+  { id: 'D04', name: 'Cosmo Pendant Light', price: 'Birr 3,100', tag: 'Bestseller', image: 'assets/work/d/d04.jpg', fallbackImage: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=800&q=80', specs: { dimensions: '40cm diameter x 30cm height', material: 'Hand-blown smoked glass shade with antique brass fittings', frame: 'Adjustable braided cable, ceiling canopy included', warranty: '2 Years Electrical', leadTime: '7–10 Days' } }
+],
 };
 
 // Stagger container variants
@@ -264,6 +266,10 @@ export default function Collection() {
                       src={item.image}
                       alt={item.name}
                       className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+                    onError={(e) => {
+    e.currentTarget.onerror = null; // prevent infinite loop
+    e.currentTarget.src = item.fallbackImage;
+  }}
                     />
 
                     {/* Hover overlay */}
@@ -343,6 +349,10 @@ export default function Collection() {
                       exit={{ opacity: 0, scale: 0.98 }}
                       transition={{ duration: 0.35, ease: 'easeOut' }}
                       className="h-full w-full object-cover"
+                      onError={(e) => {
+    e.currentTarget.onerror = null; // prevent infinite loop
+    e.currentTarget.src = selectedItem.fallbackImage;
+  }}
                     />
                   </AnimatePresence>
 
