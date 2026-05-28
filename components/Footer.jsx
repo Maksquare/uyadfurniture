@@ -1,5 +1,5 @@
 'use client';
-
+import Image from 'next/image';
 export default function Footer() {
   const socialLinks = [
     { name: 'Telegram', channel: 'UYAD Furniture', icon: 'ri-telegram-fill', color: 'hover:bg-[#229ED9]/10 hover:text-[#229ED9] dark:hover:bg-[#229ED9]/20', url: 'https://t.me/uyadfurniture' },
@@ -25,7 +25,9 @@ export default function Footer() {
             
             {/* Identity Grid Column */}
             <div>
-              <h3 className="font-[family:var(--font-dm-serif)] text-3xl text-[#f1ae2c] mb-4 tracking-wider">UYAD.</h3>
+              <h3 className="font-[family:var(--font-dm-serif)] text-3xl text-[#f1ae2c] mb-4 tracking-wider">
+                <Image src="/uyadf.svg" alt="UYAD" width={180} height={140} />
+              </h3>
               <p className="max-w-xs text-sm font-light leading-relaxed text-slate-300 dark:text-slate-400">
                 Elevating functional living modules through precision materials and striking minimalist profiles.
               </p>

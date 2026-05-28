@@ -1,21 +1,32 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useCart } from '@/context/CartContext';
-import { useAtmosphere } from '@/context/AtmosphereContext';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { useCart } from "@/context/CartContext";
+import { useAtmosphere } from "@/context/AtmosphereContext";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import Image from "next/image";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const navLinks = [
-  { name: 'Home',               id: '#',          idAttr: undefined,    label: '01 // Main Foyer' },
-  { name: 'Gallery Collection', id: '#collection', idAttr: 'collection', label: '02 // Gallery'    },
-  { name: 'Contact',            id: '#contact',    idAttr: 'contact',    label: '03 // Atelier'    },
+  { name: "Home", id: "#", idAttr: undefined, label: "01 - Home" },
+  {
+    name: "Gallery Collection",
+    id: "#collection",
+    idAttr: "collection",
+    label: "02 - Gallery",
+  },
+  { name: "Contact", id: "#contact", idAttr: "contact", label: "03 - Contact" },
 ];
 
 // ─── Scroll progress hook ─────────────────────────────────────────────────────
 function useScrollProgress() {
   const { scrollYProgress } = useScroll();
-  const width = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const width = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   return width;
 }
 
@@ -25,17 +36,17 @@ export default function Navbar() {
   const { lightingMode, setLightingMode } = useAtmosphere();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection]       = useState('home');
-  const [isScrolled, setIsScrolled]             = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [isScrolled, setIsScrolled] = useState(false);
   const scrollBarWidth = useScrollProgress();
 
   // ── Intersection + scroll detection ──────────────────────────────────────
   useEffect(() => {
-    const targets = ['collection', 'contact'];
+    const targets = ["collection", "contact"];
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 24);
-      if (window.scrollY < 150) setActiveSection('home');
+      if (window.scrollY < 150) setActiveSection("home");
     };
 
     const observer = new IntersectionObserver(
@@ -44,17 +55,17 @@ export default function Navbar() {
           if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
-      { rootMargin: '-40% 0px -50% 0px', threshold: 0 },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 },
     );
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     targets.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       targets.forEach((id) => {
         const el = document.getElementById(id);
         if (el) observer.unobserve(el);
@@ -68,30 +79,28 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
 
     if (!idAttr) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setActiveSection('home');
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setActiveSection("home");
       return;
     }
 
     const element = document.getElementById(idAttr);
     if (element) {
       const offsetPosition =
-        element.getBoundingClientRect().top +
-        window.scrollY -
-        80;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        element.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
       setActiveSection(idAttr);
     }
   };
 
   const activeLink = navLinks.find(
-    (l) => (l.idAttr ?? 'home') === activeSection,
+    (l) => (l.idAttr ?? "home") === activeSection,
   );
 
   // ── Derived ───────────────────────────────────────────────────────────────
   const navBg = isScrolled
-    ? 'bg-white/[0.97] dark:bg-[#0b1b2b]/[0.97]'
-    : 'bg-white/90 dark:bg-[#0b1b2b]/90';
+    ? "bg-white/[0.97] dark:bg-[#0b1b2b]/[0.97]"
+    : "bg-white/90 dark:bg-[#0b1b2b]/90";
 
   return (
     <nav
@@ -102,7 +111,7 @@ export default function Navbar() {
         ${navBg}
         border-b border-[#0f2236]/[0.07] dark:border-white/[0.06]
         backdrop-blur-[18px] saturate-150
-        ${isScrolled ? 'shadow-[0_1px_24px_rgba(15,34,54,0.06)]' : ''}
+        ${isScrolled ? "shadow-[0_1px_24px_rgba(15,34,54,0.06)]" : ""}
       `}
     >
       {/* ── Scroll Progress Line ─────────────────────────────────────────── */}
@@ -113,7 +122,6 @@ export default function Navbar() {
 
       {/* ── Main Row ─────────────────────────────────────────────────────── */}
       <div className="max-w-[1200px] h-[68px] mx-auto px-6 sm:px-8 flex items-center justify-between gap-6">
-
         {/* Brand */}
         <a
           href="#"
@@ -121,7 +129,13 @@ export default function Navbar() {
           className="flex items-center gap-2.5 group shrink-0"
         >
           <span className="font-[family:var(--font-cormorant)] text-[26px] font-semibold tracking-[0.12em] text-[#0f2236] dark:text-slate-100 group-hover:text-[#f1ae2c] transition-colors duration-300">
-            UYAD
+            <Image
+              src={lightingMode === "night" ? "/uyadf.svg" : "/uyad.svg"}
+              alt="UYAD"
+              width={120}
+              height={120}
+              className="transition-all duration-500"
+            />
           </span>
           <span className="hidden sm:inline-flex items-center text-[7.5px] font-bold uppercase tracking-[0.28em] text-[#f1ae2c] border border-[#f1ae2c]/35 rounded-[2px] px-1.5 py-[3px]">
             Premium
@@ -131,7 +145,7 @@ export default function Navbar() {
         {/* Desktop navigation */}
         <div className="hidden md:flex items-center h-full gap-0.5">
           {navLinks.map((link) => {
-            const linkId  = link.idAttr ?? 'home';
+            const linkId = link.idAttr ?? "home";
             const isActive = activeSection === linkId;
 
             return (
@@ -143,9 +157,11 @@ export default function Navbar() {
                   relative flex items-center h-11 px-4
                   text-[9.5px] font-bold uppercase tracking-[0.22em]
                   rounded-[3px] transition-colors duration-250
-                  ${isActive
-                    ? 'text-[#0f2236] dark:text-white'
-                    : 'text-[#0f2236]/38 dark:text-slate-400/50 hover:text-[#0f2236] dark:hover:text-white'}
+                  ${
+                    isActive
+                      ? "text-[#0f2236] dark:text-white"
+                      : "text-[#0f2236]/38 dark:text-slate-400/50 hover:text-[#0f2236] dark:hover:text-white"
+                  }
                 `}
               >
                 <span className="relative z-10">{link.name}</span>
@@ -155,7 +171,7 @@ export default function Navbar() {
                   <motion.div
                     layoutId="navActiveFrame"
                     className="absolute inset-0 rounded-[3px] border border-[#0f2236]/[0.09] bg-[#0f2236]/[0.015] dark:border-white/[0.08] dark:bg-white/[0.01] pointer-events-none"
-                    transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
                   >
                     <span className="absolute top-0 left-0 w-[6px] h-[6px] border-t-[1.5px] border-l-[1.5px] border-[#f1ae2c]" />
                     <span className="absolute bottom-0 right-0 w-[6px] h-[6px] border-b-[1.5px] border-r-[1.5px] border-[#f1ae2c]" />
@@ -168,30 +184,33 @@ export default function Navbar() {
 
         {/* Right controls */}
         <div className="flex items-center gap-3.5 shrink-0">
-
           {/* Atmosphere toggle */}
           <div className="flex items-center gap-[2px] bg-[#0f2236]/[0.03] dark:bg-white/[0.03] border border-[#0f2236]/[0.07] dark:border-white/[0.06] rounded-full p-[3px] transition-colors duration-500">
             <button
-              onClick={() => setLightingMode('day')}
+              onClick={() => setLightingMode("day")}
               className={`
                 h-7 px-3 rounded-full text-[8.5px] font-bold uppercase tracking-[0.18em]
                 flex items-center gap-[5px] transition-all duration-250 cursor-pointer
-                ${lightingMode === 'day'
-                  ? 'bg-white dark:bg-white/10 text-[#0f2236] dark:text-white shadow-[0_1px_4px_rgba(15,34,54,0.08)]'
-                  : 'text-[#0f2236]/40 dark:text-slate-400 hover:text-[#0f2236] dark:hover:text-white'}
+                ${
+                  lightingMode === "day"
+                    ? "bg-white dark:bg-white/10 text-[#0f2236] dark:text-white shadow-[0_1px_4px_rgba(15,34,54,0.08)]"
+                    : "text-[#0f2236]/40 dark:text-slate-400 hover:text-[#0f2236] dark:hover:text-white"
+                }
               `}
             >
               <i className="ri-sun-line text-[11px] text-[#f1ae2c]" />
               <span className="hidden sm:inline">Light</span>
             </button>
             <button
-              onClick={() => setLightingMode('night')}
+              onClick={() => setLightingMode("night")}
               className={`
                 h-7 px-3 rounded-full text-[8.5px] font-bold uppercase tracking-[0.18em]
                 flex items-center gap-[5px] transition-all duration-250 cursor-pointer
-                ${lightingMode === 'night'
-                  ? 'bg-[#0f2236] text-white shadow-[0_1px_4px_rgba(15,34,54,0.15)]'
-                  : 'text-[#0f2236]/40 dark:text-slate-400 hover:text-[#0f2236] dark:hover:text-white'}
+                ${
+                  lightingMode === "night"
+                    ? "bg-[#0f2236] text-white shadow-[0_1px_4px_rgba(15,34,54,0.15)]"
+                    : "text-[#0f2236]/40 dark:text-slate-400 hover:text-[#0f2236] dark:hover:text-white"
+                }
               `}
             >
               <i className="ri-moon-clear-line text-[11px] text-[#f1ae2c]" />
@@ -210,10 +229,10 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.18, ease: 'easeOut' }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
                 className="block text-[8px] font-bold uppercase tracking-[0.18em] text-[#f1ae2c]"
               >
-                {activeLink?.label ?? '01 // Main Foyer'}
+                {activeLink?.label ?? "01 // Main Foyer"}
               </motion.span>
             </AnimatePresence>
           </div>
@@ -223,7 +242,7 @@ export default function Navbar() {
             onClick={() => setIsCartOpen(true)}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
             className="
               flex items-center gap-2 h-9 px-[18px] rounded-full cursor-pointer
               text-[9px] font-bold uppercase tracking-[0.2em]
@@ -255,11 +274,11 @@ export default function Navbar() {
             aria-label="Toggle menu"
           >
             <motion.i
-              key={isMobileMenuOpen ? 'close' : 'open'}
+              key={isMobileMenuOpen ? "close" : "open"}
               initial={{ rotate: -15, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               transition={{ duration: 0.18 }}
-              className={`text-[20px] block ${isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-4-line'}`}
+              className={`text-[20px] block ${isMobileMenuOpen ? "ri-close-line" : "ri-menu-4-line"}`}
             />
           </motion.button>
         </div>
@@ -270,7 +289,7 @@ export default function Navbar() {
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="
@@ -282,7 +301,7 @@ export default function Navbar() {
           >
             <div className="px-6 py-5 flex flex-col gap-1">
               {navLinks.map((link, i) => {
-                const linkId   = link.idAttr ?? 'home';
+                const linkId = link.idAttr ?? "home";
                 const isActive = activeSection === linkId;
 
                 return (
@@ -298,9 +317,11 @@ export default function Navbar() {
                       px-4 py-3 rounded-md
                       text-[10px] font-bold uppercase tracking-[0.18em]
                       transition-all duration-200
-                      ${isActive
-                        ? 'bg-[#0f2236]/[0.04] dark:bg-white/[0.05] text-[#0f2236] dark:text-white border-l-2 border-[#f1ae2c] pl-[14px]'
-                        : 'text-[#0f2236]/55 dark:text-slate-300 hover:bg-[#0f2236]/[0.03] dark:hover:bg-white/[0.04]'}
+                      ${
+                        isActive
+                          ? "bg-[#0f2236]/[0.04] dark:bg-white/[0.05] text-[#0f2236] dark:text-white border-l-2 border-[#f1ae2c] pl-[14px]"
+                          : "text-[#0f2236]/55 dark:text-slate-300 hover:bg-[#0f2236]/[0.03] dark:hover:bg-white/[0.04]"
+                      }
                     `}
                   >
                     <span>{link.name}</span>
@@ -320,18 +341,20 @@ export default function Navbar() {
                 </span>
                 <div className="flex items-center gap-[2px] bg-[#0f2236]/[0.03] border border-[#0f2236]/[0.07] dark:border-white/[0.06] rounded-full p-[2px]">
                   <button
-                    onClick={() => setLightingMode('day')}
+                    onClick={() => setLightingMode("day")}
                     className={`h-6 px-3 rounded-full text-[8px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all duration-200 cursor-pointer
-                      ${lightingMode === 'day' ? 'bg-white text-[#0f2236] shadow-sm' : 'text-[#0f2236]/40 dark:text-slate-400'}`}
+                      ${lightingMode === "day" ? "bg-white text-[#0f2236] shadow-sm" : "text-[#0f2236]/40 dark:text-slate-400"}`}
                   >
-                    <i className="ri-sun-line text-[10px] text-[#f1ae2c]" /> Light
+                    <i className="ri-sun-line text-[10px] text-[#f1ae2c]" />{" "}
+                    Light
                   </button>
                   <button
-                    onClick={() => setLightingMode('night')}
+                    onClick={() => setLightingMode("night")}
                     className={`h-6 px-3 rounded-full text-[8px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all duration-200 cursor-pointer
-                      ${lightingMode === 'night' ? 'bg-[#0f2236] text-white' : 'text-[#0f2236]/40 dark:text-slate-400'}`}
+                      ${lightingMode === "night" ? "bg-[#0f2236] text-white" : "text-[#0f2236]/40 dark:text-slate-400"}`}
                   >
-                    <i className="ri-moon-clear-line text-[10px] text-[#f1ae2c]" /> Dark
+                    <i className="ri-moon-clear-line text-[10px] text-[#f1ae2c]" />{" "}
+                    Dark
                   </button>
                 </div>
               </div>

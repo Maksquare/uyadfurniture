@@ -1,20 +1,14 @@
-import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
+import { Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
-import { AtmosphereProvider } from '@/context/AtmosphereContext'; // <-- Import here
+import { AtmosphereProvider } from '@/context/AtmosphereContext';
 import GlobalCart from '@/components/GlobalCart';
 
 const playfairDisplay = Playfair_Display({ 
   subsets: ['latin'], 
   weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
-  variable: '--font-dm-serif' 
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({ 
-  subsets: ['latin'], 
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-jost' 
+  variable: '--font-primary'
 });
 
 export const metadata = {
@@ -28,8 +22,7 @@ export default function RootLayout({ children }) {
       <head>
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
       </head>
-      <body className={`${playfairDisplay.variable} ${plusJakartaSans.variable} font-[family:var(--font-jost)] bg-[#f8fafc] text-[#143755] dark:bg-[#071320] dark:text-slate-100 antialiased transition-colors duration-500`}>
-        {/* Wrap both providers here */}
+      <body className={`${playfairDisplay.variable} font-[family:var(--font-primary)] bg-[#f8fafc] text-[#143755] dark:bg-[#071320] dark:text-slate-100 antialiased transition-colors duration-500`}>
         <AtmosphereProvider>
           <CartProvider>
             {children}

@@ -1,21 +1,18 @@
 @import "tailwindcss";
-/* ── ADD THIS LINE TO ENABLE MANUAL BUTTON TOGGLING ── */
+
 @custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  /* Branding Colors */
   --color-primary: #143755;
   --color-secondary: #475569;
   --color-accent: #f1ae2c;
   --color-accent-hover: #d19624;
   --color-accent-secondary: #f0f4f8;
 
-  /* Typography mapping to Next.js font variables */
-  --font-serif: var(--font-dm-serif), serif;
-  --font-jost: var(--font-jost), sans-serif;
+  --font-primary: var(--font-primary), serif;
 }
 
-html,
-body {
+html, body {
   scroll-behavior: smooth;
   background-color: white;
 }
@@ -25,7 +22,6 @@ html.dark body {
   background-color: #071320;
 }
 
-/* Custom scroll margin helper targeting sections */
 section[id] {
   scroll-margin-top: 95px;
 }
